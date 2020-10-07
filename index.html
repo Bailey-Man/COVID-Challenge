@@ -1,591 +1,76 @@
 <!DOCTYPE html>
-<html>
+<!-- saved from url=(0046)https://covid19abmdash.web.app/html/about.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>About this Model</title>
+        <!--Open Sans from Google fonts-->
+        <link href="./disclaimerPage_files/css" rel="stylesheet" type="text/css">
+        <link href="./disclaimerPage_files/css(1)" rel="stylesheet">
+        <link href="./disclaimerPage_files/model.css" rel="stylesheet">
+        
+    </head>
+    <body id="main" style="position: relative;">
+        <span style="position: relative; z-index: 1;"></span>
+        <div style="height: 70%; width: 70%; margin: 0px auto; position: relative; z-index: 1;">
+            <div class="testbox">
+                <form>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COVID Data Challenge</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-</head>
-
-<body>
-    <div class="jumbotron text-center">
-        <h1>COVID Travel Planner</h1>
-        <h3><b>Make more informed desicions about traveling during the Era of COVID-19</b></h3>
-        <br>
-        <p style="font-size:medium; margin-bottom: -20px"><b>Contributors:</b> Bailey Man, Pietro Emilio Spini, Mary Kovic, Adi Gupta, Ansh Motiani</p>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="row">
-                    <h2></h2>
-                    <form style="box-shadow: 0 0 10px grey; padding: 0 0 0 10px;">
-                        <!--ZIP-->
-                        <div class="form-group" style="padding: 10px 0 0 0;">
-                            <label for="source-zip">Zip code:</label>
-                            <input type="text" id="source-zip" class="input" name="source-zip" value="" onchange="enable_type(this.value);" onkeypress="enable_type(this.value)"><br>
-                            <div>
-                                <h5 id="invalid_zip_msg"></h5>
-                            </div>
-                        </div>
-
-                        <!--TYPE at Source Zip-->
-                        <div class="form-group">
-                            <label for="type-dropdown">Select a type of service:</label><br>
-                            <select id="type-dropdown" class="input" disabled="disabled" onchange="enable_POI(); ">
-                            <option></option>
-                            </select><br>
-                        </div>
-
-                        <!--POIs at Source Zip & Type-->
-                        <div class="form-group">
-                            <label for="POI-dropdown">Select an establishment:</label><br>
-                            <select id="POI-dropdown" class="input" disabled="disabled" onchange="enable_submit()">
-                            <option></option>
-                        </select><br>
-                        </div>
-
-                        <!--SUBMIT Button-->
-                        <br><input id="submit" type="button" class="input" value="Go" disabled="disabled" onclick="calculate_risk_comparison()" /><br><br>
-                    </form>
+               
+                <h1> About this model </h1>
+                <ol>
+                     
+                    <li> This model is a <b>work in progress</b>. Model parameters and assumptions are continuously reviewed and revised based on published research.</li>
+                    
+                </ol>
+                <div>
+                    <h4> <b> Model Information and Assumptions</b></h4>
+                    <ol>
+                    <li>This model calculates the <b>risk of COVID-19 transmission</b> when visiting a particular point of interest. Additionally, it provides a <b>list of similar POIs</b>, from the neighborhood, that have varying level of risks</li>
+                    
+                </ol>
                 </div>
-                <div class="row">
-                    <h2>The Future of this Dashboard</h2>
-                    <p>As time permits, the project has plans for:</p>
-                    <ul>
-                        <li>
-                            More accurate 'typing' of businesses
-                        </li>
-                        <li>
-                            Map-based output
-                        </li>
-                        <li>
-                            Time_of_day and Day_of_week filtering
-                        </li>
-                        <li>
-                            Up-to-date (pulled from data stream) model parameters (currently accurate up to september 23)
-                        </li>
-                        <li>
-                            Clean Model Pipeline from infection rate/zip -> mobility data -> POI risk
-                        </li>
-                        <li>
-                            Contact tracing of infected individuals to better predict active case counts
-                        </li>
-                    </ul>
-                    <p>All feedback or suggestions about this dashboard is appreciated: <br><a href="https://docs.google.com/forms/d/e/1FAIpQLSdFxozHz6-RYLhfNXnBTrYXNpNLmYl7wkyUa-d9KKNXrRHRgg/viewform">Google Forms Survey</a></p>
 
+                <div>
+                    <h4> <b> User Adjustable Parameters</b></h4>
+                    <ol>
+                        <li>
+                            <b>Neighborhoods/Districts</b>: Choose the particular area located in <b>San Diego</b>. 
+                            <ul><li>(Ex: Chula Vista, La Jolla, Downtown, etc.)</li></ul>
+                        </li>
+                        <li>
+                            <b>Type of Business</b>: Choose the type of business located in the neighborhood. 
+                            <ul><li>(Ex: Restaurant, Bank, Grocery, etc.)</li></ul>
+                        </li>
+                        <li>
+                            <b>Point of Interest</b>: Choose the particular POI. 
+                            <ul><li>(Ex: McDonalds, Burger King, Tapioca Express, etc.)</li></ul>
+                        </li>
+
+                    </ol>
                 </div>
-            </div>
-            <div id="comparison_output" class="col-sm-6">
-                <h2 style="text-align: center;">Search for similar locations within the same Zipcode</h2>
-                <!--
-                <ul class="nav nav-tabs">
-                    <li class="active"><a></a></li>
-                    <li><a data-toggle="tab" href="#county-tab">County-wide</a></li>
-                </ul>
-            -->
 
-                <div class="tab-content">
-                    <div id="local-tab" class="tab-pane fade in active">
-                        <p id="out_1" style="padding: 30px 30px 0 30px; font-weight: bold;"></p>
-                        <p id="out_2" style="padding: 0 30px 0 30px; font-weight: bold;"></p>
-                        <p id="out_3" style="padding: 0 30px 0 30px; font-weight: bold;"></p>
+                <div> <h4> <b> To learn more about the project, <a href="COVID_Brief.pdf" download=""> click here! </a> </b></h4> </div>
+                <div> <h4> <b id="message"> Please click run the model to choose parameters for a simulation, and click have feedback on the model results page if you want us to simulate your school's floor plans and reopening scenarios, or otherwise get in touch. </b></h4> </div>
+                
+                <button type="button" onclick="window.location.href='dash.html'" class="btn-outline-mdb-color btn-lg waves-effect hvr-radial-out " style="margin: auto; margin-top:20px;" id="proceed">Run the Model</button>
+                <script>
+                    var btn = document.getElementById('proceed');
+                    var message = document.getElementById('message');
 
-                        <div id="POI-card-container">
-                            <div id="POI-card-container-overlay">
-                                <table id="POI-table" style="padding-left: 45px;">
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!--
-                    <div id="county-tab" class="tab-pane fade in active">
-                        <h4>County Header</h4>
-                        <div id="POI-county-out"></div>
-                    </div>
-                -->
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <h2>How "risk" is calculated</h2>
-                <p>The output seen is a list of all other Places of Interest of the same type as the original. These POI are then filtered either by zip code or by county to provide the desired comparisons.</p>
-                <p>This model of 'risk factor' is defined as the probability that an active case of COVID-19 visited the selected point of interest recently. We take into account case counts and population from each zip code in San Diego county, and analyze
-                    the movement of visitors to each point of interest from those zip codes.</p>
-                <p>For more information on the model, please see the following paper: <br><a href="COVID_Brief.pdf">COVID Brief</a></p>
-
+                    if (sessionStorage.nxtpage == 'simulate') {
+                        btn.innerHTML = "Run the Model"; 
+                        message.innerHTML += "Run the model to choose parameters for a simulation, and click have feedback on the model results page if you want us to simulate your school's floor plans and reopening scenarios, or otherwise get in touch. "
+                    };
+                    
+                </script>
+                </form>
             </div>
         </div>
-    </div>
-    <div class="jumbotron text-center" style="margin-bottom:0">
-    </div>
+        <span style="position: relative; z-index: 1;"></span>
 
-
-    <!--Google Maps-->
-
-    <!-----------------------------------------------------------------------------------------------------------------------
-    <script>
-        // Initialize and add the map
-        function initMap() {
-            // The location of Uluru
-            var uluru = {
-                lat: 33.0,
-                lng: -116.86
-            };
-            // The map, centered at Uluru
-            var map = new google.maps.Map(
-                document.getElementById('map'), {
-                    zoom: 9,
-                    center: uluru
-                });
-            // The marker, positioned at Uluru
-
-        }
-        /*Load the API from the specified URL
-         The async attribute allows the browser to render the page while the API loads
-         The key parameter will contain your own API key (which is not needed for this tutorial)
-         The callback parameter executes the initMap() function
-        */
-    </script>
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8zfDkpEDIgL0UhUvYvwu-J1JCPvriRIk&callback=initMap">
-    </script>
-    ------------------------------------------------------------------------------------------------------------------------>
-
+        <script style="position: relative; z-index: 1;">
+            
+        </script><span style="position: relative; z-index: 1;">
+    
+    
 </body>
-
-<script src="papaparse.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-
-
-<script>
-    /**************************Variables**************************/
-    var POI_arr = new Array();
-
-    // Relavent columns in the csv data file
-    var col_POI = 0,
-        col_zip = 1,
-        col_type = 5,
-        col_address = 6,
-        col_lat = 7,
-        col_lng = 8,
-        col_risk = 10;
-
-    /**********************OnCLICK Events*************************/
-    function is_zip_valid(data) {
-        var usr_zip = (document.getElementById("source-zip").value);
-        var row = new Array();
-        var zip_arr = new Array();
-        for (var i = 0; i < data.length; i++) {
-            row = Object.values(data[i]); //get the ith row
-            csv_zip = row[col_zip];
-            if (isUnique(csv_zip, zip_arr)) {
-                zip_arr.push(csv_zip);
-            }
-            if (csv_zip === usr_zip) {}
-        }
-        var s = "";
-        for (var i = 0; i < zip_arr.length; i++) {
-            s += zip_arr[i] + ",";
-        }
-        return false;
-    }
-
-    function enable_type(zip) {
-        var el = document.getElementById("invalid_zip_msg");
-        if (!parseData(is_zip_valid)) {
-            innerHTML = "";
-            //clear type and POI dropdowns
-            clear_dropdown("type-dropdown");
-            clear_dropdown("POI-dropdown");
-
-            //enable type dropdown and disable POI dropdown
-            document.getElementById("type-dropdown").disabled = false;
-            document.getElementById("POI-dropdown").disabled = true;
-            document.getElementById("submit").disabled = true;
-            clearBox("POI-table");
-            clearBox("out_1");
-            clearBox("out_2");
-
-            //fill the type dropdown with the available types
-            parseData(getTypes);
-        } else {
-            el.innerHTML = "Please choose another zip";
-        }
-    }
-
-    function enable_POI() {
-        // clear POI dropdown
-        clear_dropdown("POI-dropdown");
-
-        //enable POI dropdown and submit button
-        document.getElementById("POI-dropdown").disabled = false;
-        document.getElementById("submit").disabled = true;
-        parseData(getPOIs);
-
-    }
-
-    function enable_submit() {
-        document.getElementById("submit").disabled = false;
-    }
-
-    function create_header(POI_out) {
-        var table_header = document.createElement("tr");
-        var table_head_POI = document.createElement("th");
-        var table_head_risk = document.createElement("th");
-
-        table_head_POI.textContent = "Establishment Name";
-        table_head_risk.textContent = "Risk Factor";
-
-        table_header.style = "width: 100%;"
-        table_head_risk.style = "text-align: right;";
-
-        table_header.append(table_head_POI);
-        table_header.append(table_head_risk);
-
-        POI_out.append(table_header);
-    }
-
-
-    function calculate_risk_comparison() {
-        //use POIarray to create new elements
-        POI_arr.sort((a, b) => (a.risk > b.risk) ? 1 : ((b.risk > a.risk) ? -1 : 0));
-        var usr_POI = document.getElementById("POI-dropdown").value;
-        var numElements = POI_arr.length;
-        var count_below = 0,
-            count_above = 0,
-            count_low = 0,
-            count_mod = 0,
-            count_high = 0,
-            count_total = 0;
-        var color_low = "#7CB9E8",
-            color_mod = "#958ee0",
-            color_high = "#fd5c63";
-
-
-
-
-
-        clearBox("POI-table");
-
-
-        var POI_out = document.getElementById("POI-table");
-
-        create_header(POI_out);
-
-        for (var i = 0; i < POI_arr.length; i++) {
-            var POI_name = POI_arr[i].name;
-            var POI_risk = POI_arr[i].risk;
-            var POI_address = POI_arr[i].address;
-
-
-            var POI_card = document.createElement("div");
-            POI_card.setAttribute("class", "POI-card");
-
-            if (getProbability(POI_risk) == "LOW")
-                count_low++;
-            else if (getProbability(POI_risk) == "MODERATE")
-                count_mod++;
-            else
-                count_high++;
-
-            if (POI_name == document.getElementById("POI-dropdown").value) {
-                count_above = POI_arr.length - i;
-                count_below = i;
-            }
-
-
-
-            var table_row = document.createElement("tr");
-            var table_data_POI = document.createElement("td");
-            var table_data_risk = document.createElement("td");
-
-
-            table_data_risk.textContent = POI_risk;
-            //el.style.position = "absolute";
-            //el.style.bottom = (POI_risk * 100) + "%";
-            if (POI_name == usr_POI) {
-                POI_card.style.background = "#FFDA00";
-                POI_card.style.color = "black";
-            } else {
-                POI_card.style.background = "rgb(20, 8, 104)";
-                POI_card.style.color = "white";
-            }
-
-            POI_card.textContent = POI_name;
-
-
-            table_data_POI.append(POI_card);
-            table_data_risk.textContent = getProbability(POI_risk);
-            table_data_risk.style = "text-align: right;"
-
-            table_row.append(table_data_POI);
-            table_row.append(table_data_risk);
-
-            POI_out.append(table_row);
-        }
-
-        /*********************************Get Gradient*****************/
-        count_total = count_above + count_below;
-        var gradient_percent_low = (count_low / count_total) * 100;
-        var gradient_percent_high = (count_high / count_total) * 100;
-        var style_grad;
-        var style_grad_end;
-
-        if ((count_low + count_mod) == 0 ||
-            (count_low + count_high) == 0 ||
-            (count_mod + count_high) == 0) {
-            style_grad = "background: ";
-            style_grad_end = "";
-        } else {
-
-            style_grad = "background: linear-gradient(to bottom, ";
-            style_grad_end = ")";
-        }
-
-
-        if (count_low > 0) {
-            style_grad += color_low + " " + gradient_percent_low + "% ";
-            if (count_mod > 0 || count_high > 0)
-                style_grad += ", "
-        } else {
-            style_grad += "";
-        }
-
-        if (count_mod > 0) {
-            style_grad += color_mod;
-            if (count_high > 0)
-                style_grad += ", "
-        } else {
-            style_grad += "";
-        }
-
-        if (count_high > 0) {
-            if (count_low || count_mod)
-                style_grad += color_high + ") " + gradient_percent_high + "%";
-            else
-                style_grad += color_high;
-        } else {
-            style_grad += style_grad_end;
-        }
-        document.getElementById("POI-card-container").style = style_grad;
-        /*********************************Get Gradient^^^^^*****************/
-
-        document.getElementById("out_1").innerHTML = ("There is a " + getProbability(get_POI_risk(usr_POI, POI_arr)) +
-            " probability that atleast one person infected with COVID will travel to the same point of interest as you.");
-        var out_2_pvs = "";
-        var is_are;
-        var s_no_s;
-
-        if (count_above == 1) {
-            is_are = "is";
-            s_no_s = "";
-        } else {
-            is_are = "are";
-            s_no_s = "s ";
-        }
-        if (count_below == 1) {
-            is_are = "is";
-            s_no_s = "";
-        } else {
-            is_are = "are";
-            s_no_s = "s";
-        }
-
-        document.getElementById("out_2").innerHTML = ("There " + is_are + " " + count_below +
-            " similar establishment" + s_no_s + " LESS risky than the one you've chosen, and " + (count_above - 1) +
-            " similar establishment" + s_no_s + " that " + is_are + " MORE risky.");
-
-    }
-
-    function toggle_risk(risk, td) {
-        if (risk < 0.01)
-            td.textContent = "RF : <0.01"
-        else
-            td.textContent = "RF : " + round(risk, 4);
-
-
-        /*
-            if (POI_risk < 0.01)
-                table_data_risk.textContent = "RF : <0.01"
-            else
-                table_data_risk.textContent = "RF : " + round(POI_risk, 2);
-*/
-    }
-
-    function round(value, decimals) {
-        return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
-    }
-
-    /*************^^^^^OnCLICK Events^^^^^^********************/
-
-
-    function clear_dropdown(elementID) {
-        var select = document.getElementById(elementID)
-        var el = document.createElement("option");
-        el.textContent = "";
-        el.value = "";
-
-        select.options.length = 0;
-        select.appendChild(el);
-    }
-
-    function getProbability(risk) {
-        if (risk < 0.33)
-            return "LOW";
-        else if (risk < 0.66)
-            return "MODERATE";
-        else
-            return "HIGH";
-    }
-
-    function get_POI_risk(POI, arr) {
-        for (var i = 0; i < arr.length; i++) {
-            if (POI == arr[i].name) {
-                return arr[i].risk;
-            }
-        }
-    }
-
-    function clearBox(elementID) {
-        document.getElementById(elementID).innerHTML = "";
-    }
-
-
-    function has_input(ID_array) {
-        var input;
-        for (var i = 0; i < ID_array.length; i++) {
-            input = document.getElementById(ID_array[i]);
-            if (input && input.value) {
-                continue;
-            }
-            return false
-        }
-        return true;
-    }
-
-    function append_dropdown(elementID, optionsArr) {
-        var select = document.getElementById(elementID)
-        for (var i = 0; i < optionsArr.length; i++) {
-            var opt = (optionsArr[i]);
-            var el = document.createElement("option");
-            el.textContent = opt;
-            el.value = opt;
-            select.appendChild(el);
-        }
-    }
-
-    function append_dropdown_object(elementID, optionsArr) {
-        var select = document.getElementById(elementID)
-        for (var i = 0; i < optionsArr.length; i++) {
-            var opt = (optionsArr[i].name);
-            var el = document.createElement("option");
-            el.textContent = opt;
-            el.value = opt;
-            select.appendChild(el);
-        }
-    }
-
-
-    function isUnique(item, arr) {
-        for (var i = 0; i < arr.length; i++) {
-            if (item == (arr[i])) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    function is_unique_object(item, arr) {
-        for (var i = 0; i < arr.length; i++) {
-            if (item == (arr[i].name)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    function append_address_to_object(name, address, arr) {
-        for (var i = 0; i < arr.length; i++) {
-            var object = arr[i];
-            if (object.name == name) {
-                (object.address_arr).push(address);
-            }
-        }
-
-    }
-
-    function getTypes(data) {
-        var usr_zip = document.getElementById('source-zip').value;
-        var csv_zip, csv_type;
-        var row = [];
-        var type_arr = new Array();
-        var count = 0;
-        for (var i = 0; i < data.length; i++) {
-
-            row = Object.values(data[i]); //get the ith row
-            csv_type = row[col_type]; // the type of a POI
-            csv_zip = row[col_zip]; // the zip where a POI is located
-
-            if (is_unique_object(csv_type, type_arr) && csv_zip == usr_zip) { // if the value is unique, add it to the array
-                var type_object = {
-                    name: csv_type, // Create a type object that holds the name of the type and
-                    type_count: 1 // how many times that type displays in the data
-                };
-                type_arr.push(type_object);
-            }
-        }
-        type_arr.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-        append_dropdown_object("type-dropdown", type_arr);
-    }
-
-    function getPOIs(data) {
-        var usr_zip = document.getElementById('source-zip').value; // user input zip
-        var usr_type = document.getElementById('type-dropdown').value; // user input type
-        var csv_zip, csv_type, csv_POI, csv_risk, csv_address; //values extracted from csv
-        var row = []; //csv row
-        var unique = true;
-
-        POI_arr = [];
-        for (var i = 0; i < data.length; i++) {
-            row = Object.values(data[i]); //get the ith row
-            csv_zip = row[col_zip];
-            csv_type = row[col_type];
-            csv_POI = row[col_POI];
-            csv_risk = row[col_risk];
-            csv_address = row[col_address];
-            if ((csv_zip == usr_zip) && (csv_type == usr_type))
-                if (is_unique_object(csv_POI, POI_arr)) {
-                    // if the object is unique, create a new object, push to array
-                    var POI_object = {
-                        name: csv_POI,
-                        risk: csv_risk,
-                        address_arr: [csv_address],
-                    };
-                    POI_arr.push(POI_object);
-                } else {
-                    append_address_to_object(csv_POI, csv_address, POI_arr);
-                }
-        }
-        POI_arr.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-        append_dropdown_object("POI-dropdown", POI_arr);
-    }
-
-    function parseData(callback) {
-        Papa.parse("https://marykovic.github.io/COVID-Challenge/data.csv", {
-            download: true,
-            header: true,
-            complete: function(results) {
-                callback(results.data);
-
-            }
-        });
-    }
-</script>
-
-; } else { append_address_to_object(csv_POI, csv_address, POI_arr); } } POI_arr.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)); append_dropdown_object("POI-dropdown", POI_arr); } function parseData(callback) { Papa.parse("https://marykovic.github.io/COVID-Challenge/data.csv",
-{ download: true, header: true, complete: function(results) { callback(results.data); } }); }
-</script>
-
 </html>
